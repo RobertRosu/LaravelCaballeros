@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCaballoRequest;
-use App\Http\Requests\UpdateCaballoRequest;
-use App\Models\Caballo;
+use App\Http\Requests\StoreCastilloRequest;
+use App\Http\Requests\UpdateCastilloRequest;
+use App\Models\Castillo;
 
-class CaballoController extends Controller
+class CastilloController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $caballos = Caballo::all();
-        return view('caballo.index', compact('caballos'));
+        //
     }
 
     /**
@@ -22,13 +21,13 @@ class CaballoController extends Controller
      */
     public function create()
     {
-        return view('caballo.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCaballoRequest $request)
+    public function store(StoreCastilloRequest $request)
     {
         //
     }
@@ -36,7 +35,7 @@ class CaballoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Caballo $caballo)
+    public function show(Castillo $castillo)
     {
         //
     }
@@ -44,7 +43,7 @@ class CaballoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Caballo $caballo)
+    public function edit(Castillo $castillo)
     {
         //
     }
@@ -52,7 +51,7 @@ class CaballoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCaballoRequest $request, Caballo $caballo)
+    public function update(UpdateCastilloRequest $request, Castillo $castillo)
     {
         //
     }
@@ -60,7 +59,7 @@ class CaballoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Caballo $caballo)
+    public function destroy(Castillo $castillo)
     {
         //
     }

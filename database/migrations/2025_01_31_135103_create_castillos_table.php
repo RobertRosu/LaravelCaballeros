@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('caballeros', function (Blueprint $table) {
+        Schema::create('castillos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('apellido');
-            $table->integer('edad');
-            $table->foreignId('id_caballo')->unique()->references('id')->on('caballos');
+            $table->integer('numero_habitantes');
+            $table->enum('reino', ['Reino 1', 'Reino 2', 'Reino 3', 'Reino 4']);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('caballeros');
+        Schema::dropIfExists('castillos');
     }
 };

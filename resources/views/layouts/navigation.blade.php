@@ -12,8 +12,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('caballero.index')" :active="request()->routeIs('caballero.index')">
+                        {{ __('Caballeros') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('caballo.index')" :active="request()->routeIs('caballo.index')">
+                        {{ __('Caballos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('escudero.index')" :active="request()->routeIs('escudero.index')">
+                        {{ __('Escuderos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('castillo.index')" :active="request()->routeIs('castillo.index')">
+                        {{ __('Castillos') }}
                     </x-nav-link>
                 </div>
             </div>
