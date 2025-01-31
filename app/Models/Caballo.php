@@ -16,4 +16,7 @@ class Caballo extends Model
     public function caballero(): HasOne{
         return $this->hasOne(Caballero::class, 'id_caballo');
     }
+
+    protected $fillable = ['nombre', 'color', 'edad'];
+    protected $guarded = ['id'];
 }

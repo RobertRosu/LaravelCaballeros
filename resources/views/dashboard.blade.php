@@ -4,10 +4,6 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-        <a href="{{route('caballero.index')}}">Caballeros</a>
-        <a href="{{route('caballo.index')}}">Caballos</a>
-        <a href="{{route('escudero.index')}}">Escuderos</a>
-        <a href="{{route('castillo.index')}}">Castillos</a>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

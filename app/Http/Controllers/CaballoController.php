@@ -30,7 +30,9 @@ class CaballoController extends Controller
      */
     public function store(StoreCaballoRequest $request)
     {
-        //
+        $validated = $request->validated();
+        Caballo::create($validated);
+        return redirect()->route('caballo.index')->with('success', 'Se ha creado un nuevo caballo');
     }
 
     /**
@@ -46,15 +48,19 @@ class CaballoController extends Controller
      */
     public function edit(Caballo $caballo)
     {
-        //
+        return view('caballo.edit', compact('caballo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCaballoRequest $request, Caballo $caballo)
+    public function update(UpdateCaballoRequest $request, int $id)
     {
-        //
+        $caballo = Caballo::find($id);
+        $validated = $request->validated();
+        $caballo->update($validated);
+
+        return redirect()->route('caballo.index')->with('success', "Se ha editado el caballo [$caballo->nombre]");
     }
 
     /**
@@ -62,6 +68,11 @@ class CaballoController extends Controller
      */
     public function destroy(Caballo $caballo)
     {
-        //
+        try{
+            $caballo->delete();
+            return redirect()->route('caballo.index')->with('success', "El caballo [$caballo->nombre] se ha eliminado");
+        }catch(\Exception $e){
+            return redirect()->route('caballo.index')->with('error', $e);
+        }
     }
 }

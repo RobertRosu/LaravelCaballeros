@@ -11,7 +11,7 @@ class StoreCaballoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreCaballoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|max:100',
+            'color' => 'required|string|in:blanco,negro,naranja,marron,otro',
+            'edad' => 'required|int'
         ];
     }
 }

@@ -44,9 +44,9 @@
     <div class="mb-5">
         <label for="id_caballo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caballo</label>
         <select name="id_caballo" id="id_caballo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value=0 selected>Por defecto</option>
+            <option value=0>Por defecto</option>
             @foreach ($caballos as $caballo)
-                <option value="{{$caballo->id}}">{{$caballo->id}} - {{$caballo->nombre}}</option>
+                <option value="{{$caballo->id}}" {{$caballo->id == $c->id_caballo ? 'selected' : ''}}>{{$caballo->id}} - {{$caballo->nombre}}</option>
             @endforeach
         </select>
     </div>

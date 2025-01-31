@@ -1,15 +1,40 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Caballeros') }}
+            {{ __('caballos') }}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
+            @if (session('success'))
+            <div id="alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+                <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <div class="ms-3 text-sm font-medium">
+                  {{session('success')}}
+                </div>
+            </div>
+            @endif
+            @if (session('error'))
+            <div id="alert-border-2" class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <div class="ms-3 text-sm font-medium">
+                  {{session('error')}}
+                </div>
+            </div>
+            @endif
 
 <div class="relative overflow-x-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <form action="{{route('caballo.create')}}">
+        @csrf
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Crear nuevo
+          </button>
+    </form>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-4">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -33,7 +58,7 @@
             @foreach ($caballos as $caballo)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <a href="{{route('caballero.show', $caballo->id)}}">{{$caballo->id}}</a>
+                    <a href="{{route('caballo.show', $caballo)}}">{{$caballo->id}}</a>
                 </th>
                 <td class="px-6 py-4">
                     {{$caballo->nombre}}
@@ -44,9 +69,21 @@
                 <td class="px-6 py-4">
                     {{$caballo->edad}}
                 </td>
+                
                 <td class="flex px-6 py-4 gap-x-4">
-                    <a href="{{route('caballero.edit', $caballo->id)}}">Editar</a>
-                    <a href="{{route('caballero.destroy', $caballo->id)}}">Eliminar</a>
+                    <form action="{{route('caballo.edit', $caballo)}}" method="GET">
+                        @csrf
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Editar
+                          </button>
+                    </form>
+                    <form action="{{route('caballo.destroy', $caballo->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Eliminar
+                          </button>
+                    </form>
                 </td>
             </tr>
             @endforeach

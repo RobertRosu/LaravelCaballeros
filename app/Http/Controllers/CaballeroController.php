@@ -52,6 +52,7 @@ class CaballeroController extends Controller
     {
         $c = Caballero::find($id);
         $caballos = Caballo::doesntHave('caballero')->get();
+        $caballos[] = Caballo::find($c->id_caballo);
         return view('caballero.edit', compact('caballos', 'c'));
     }
 
