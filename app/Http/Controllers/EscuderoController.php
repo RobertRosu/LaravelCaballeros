@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEscuderoRequest;
 use App\Http\Requests\UpdateEscuderoRequest;
 use App\Models\Escudero;
+use App\Models\Caballero;
 
 class EscuderoController extends Controller
 {
@@ -13,7 +14,8 @@ class EscuderoController extends Controller
      */
     public function index()
     {
-        //
+        $escuderos = Escudero::all();
+        return view('escudero.index', compact('escuderos'));
     }
 
     /**
@@ -21,7 +23,8 @@ class EscuderoController extends Controller
      */
     public function create()
     {
-        //
+        $caballeros = Caballero::doesntHave('escuderos')->get();
+        return view('escudero.create', compact('caballeros'));
     }
 
     /**
@@ -29,7 +32,9 @@ class EscuderoController extends Controller
      */
     public function store(StoreEscuderoRequest $request)
     {
-        //
+        $validated = $request->validated();
+        Escudero::create($validated);
+        return redirect()->route('escudero.index')->with('success', 'Se ha creado un nuevo escudero');
     }
 
     /**
@@ -45,7 +50,9 @@ class EscuderoController extends Controller
      */
     public function edit(Escudero $escudero)
     {
-        //
+        $caballeros = Caballero::doesntHave('escuderos')->get();
+        $caballeros[] = Caballero::find($escudero->id_caballero);
+        return view('escudero.edit', compact('caballeros', 'escudero'));
     }
 
     /**
@@ -53,7 +60,9 @@ class EscuderoController extends Controller
      */
     public function update(UpdateEscuderoRequest $request, Escudero $escudero)
     {
-        //
+        $validated = $request->validated();
+        $escudero->update($validated);
+        return redirect()->route('escudero.index')->with('success', "Se ha editado el caballero [$escudero->nombre]");
     }
 
     /**
@@ -61,6 +70,11 @@ class EscuderoController extends Controller
      */
     public function destroy(Escudero $escudero)
     {
-        //
+        try{
+            $escudero->delete();
+            return redirect()->route('escudero.index')->with('success', "El escudero [$escudero->nombre] se ha eliminado");
+        }catch(\Exception $e){
+            return redirect()->route('escudero.index')->with('error', $e);
+        }
     }
 }

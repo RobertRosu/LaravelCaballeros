@@ -15,4 +15,7 @@ class Escudero extends Model
     public function caballero(): BelongsTo{
         return $this->belongsTo(Caballero::class, 'id_caballero');
     }
+
+    protected $fillable = ['nombre', 'apellido', 'edad', 'id_caballero'];
+    protected $guarded = ['id'];
 }

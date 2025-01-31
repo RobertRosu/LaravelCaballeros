@@ -11,7 +11,7 @@ class UpdateEscuderoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateEscuderoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'edad' => 'required|int',
+            'id_caballero' => 'required|integer'
         ];
     }
 }

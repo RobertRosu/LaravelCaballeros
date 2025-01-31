@@ -21,7 +21,7 @@ class Caballero extends Model
     }
 
     public function escuderos(): HasMany{
-        return $this->hasMany(Escudero::class);
+        return $this->hasMany(Escudero::class, 'id_caballero');
     }
 
     public function castillos(): BelongsToMany{
