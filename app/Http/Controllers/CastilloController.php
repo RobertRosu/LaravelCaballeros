@@ -22,7 +22,7 @@ class CastilloController extends Controller
      */
     public function create()
     {
-        //
+        return view('castillo.create');
     }
 
     /**
@@ -30,7 +30,9 @@ class CastilloController extends Controller
      */
     public function store(StoreCastilloRequest $request)
     {
-        //
+        $validated = $request->validated();
+        Castillo::create($validated);
+        return redirect()->route('castillo.index')->with('success', 'Se ha creado un nuevo castillo');
     }
 
     /**
@@ -46,15 +48,19 @@ class CastilloController extends Controller
      */
     public function edit(Castillo $castillo)
     {
-        //
+        return view('castillo.edit', compact('castillo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCastilloRequest $request, Castillo $castillo)
+    public function update(UpdateCastilloRequest $request, int $id)
     {
-        //
+        $castillo = Castillo::find($id);
+        $validated = $request->validated();
+        $castillo->update($validated);
+
+        return redirect()->route('castillo.index')->with('success', "Se ha editado el castillo [$castillo->nombre]");
     }
 
     /**
