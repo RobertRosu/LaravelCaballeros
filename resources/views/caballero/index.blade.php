@@ -70,7 +70,7 @@
                 </th>
                 <td class="px-6 py-4">
                     @foreach ($caballero->castillos as $castillo)
-                        <a href="{{route('castillo.show', $castillo)}}">{{$castillo->nombre}}</a>,
+                        <a href="{{route('castillo.show', $castillo)}}">{{$castillo->nombre}}</a><br>
                     @endforeach
                 </td>
                 <td class="flex px-6 py-4 gap-x-4">
