@@ -25,7 +25,8 @@ class StoreCaballeroRequest extends FormRequest
             'nombre' => 'required|string|max:100',
             'apellido' => 'required|string|max:100',
             'edad' => 'required|int',
-            'id_caballo' => 'required|integer'
+            'id_caballo' => 'required|integer',
+            'castillos' => 'required|array'
         ];
     }
 }

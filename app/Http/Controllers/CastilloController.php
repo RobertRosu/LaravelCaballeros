@@ -13,7 +13,8 @@ class CastilloController extends Controller
      */
     public function index()
     {
-        //
+        $castillos = Castillo::all();
+        return view('castillo.index', compact('castillos'));
     }
 
     /**
@@ -61,6 +62,11 @@ class CastilloController extends Controller
      */
     public function destroy(Castillo $castillo)
     {
-        //
+        try{
+            $castillo->delete();
+            return redirect()->route('castillo.index')->with('success', "El castillo [$castillo->nombre] se ha eliminado");
+        }catch(\Exception $e){
+            return redirect()->route('castillo.index')->with('error', $e);
+        }
     }
 }

@@ -11,7 +11,7 @@ class StoreCastilloRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreCastilloRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|max:100',
+            'numero_habitantes' => 'required|int',
+            'reino' => 'required|string|in:Reino 1,Reino 2,Reino 3,Reino 4'
         ];
     }
 }

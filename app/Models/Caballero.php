@@ -25,7 +25,7 @@ class Caballero extends Model
     }
 
     public function castillos(): BelongsToMany{
-        return $this->belongsToMany(Castillo::class, 'caballero_castillo');
+        return $this->belongsToMany(Castillo::class, 'caballero_castillo', 'id_caballero', 'id_castillo');
     }
 
     protected $fillable = ['nombre', 'apellido', 'edad', 'id_caballo'];

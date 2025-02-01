@@ -13,6 +13,9 @@ class Castillo extends Model
     use HasFactory;
 
     public function caballeros(): BelongsToMany{
-        return $this->belongsToMany(Caballero::class, 'id_caballero');
+        return $this->belongsToMany(Caballero::class, 'caballero_castillo', 'id_caballero', 'id_castillo');
     }
+
+    protected $fillable = ['nombre', 'numero_habitantes', 'reino'];
+    protected $guarded = ['id'];
 }

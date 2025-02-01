@@ -49,6 +49,15 @@
             @endforeach
         </select>
     </div>
+    <div class="mb-5">
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Castillos</label><br>
+      @foreach ($castillos as $castillo)
+      <div class="flex items-center mb-4">
+        <input id="{{$castillo->nombre}}" type="checkbox" value="{{$castillo->id}}" name="castillos[]" {{ in_array($castillo->id, old('castillos', [])) && 'checked' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="{{$castillo->nombre}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$castillo->nombre}}</label>
+    </div>      
+    @endforeach
+  </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear</button>
   </form>
   

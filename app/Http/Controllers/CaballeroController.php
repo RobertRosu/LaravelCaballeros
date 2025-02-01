@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCaballeroRequest;
 use App\Http\Requests\UpdateCaballeroRequest;
 use App\Models\Caballero;
 use App\Models\Caballo;
+use App\Models\Castillo;
 
 class CaballeroController extends Controller
 {
@@ -24,7 +25,8 @@ class CaballeroController extends Controller
     public function create()
     {
         $caballos = Caballo::doesntHave('caballero')->get();
-        return view('caballero.create', compact('caballos'));
+        $castillos = Castillo::all();
+        return view('caballero.create', compact('caballos', 'castillos'));
     }
 
     /**
@@ -33,7 +35,8 @@ class CaballeroController extends Controller
     public function store(StoreCaballeroRequest $request)
     {
         $validated = $request->validated();
-        Caballero::create($validated);
+        $caballero = Caballero::create($validated);
+        $caballero->castillos()->sync($validated['castillos']);
         return redirect()->route('caballero.index')->with('success', 'Se ha creado un nuevo caballero');
     }
 
